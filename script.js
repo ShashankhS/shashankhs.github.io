@@ -297,11 +297,11 @@ class CursorEffect {
 document.addEventListener('DOMContentLoaded', () => {
     // Typing animation phrases
     const typingPhrases = [
-        'Building digital experiences',
-        'Crafting clean code',
-        'Solving complex problems',
-        'Creating beautiful interfaces',
-        'Developing scalable solutions'
+        'Exploring the frontiers of AI research',
+        'Researching probabilistic machine learning',
+        'Advancing neural network methodologies',
+        'Bridging ML theory and real-world systems',
+        'Passionate about pushing AI forward'
     ];
 
     // Initialize typing animation
