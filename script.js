@@ -180,7 +180,7 @@ class SmoothScroll {
 }
 
 // ========================================
-// Contact Form
+// Contact Form (Formspree Integration)
 // ========================================
 class ContactForm {
     constructor() {
@@ -194,30 +194,46 @@ class ContactForm {
         }
     }
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
         
-        // Get form data
-        const formData = new FormData(this.form);
-        const data = Object.fromEntries(formData);
-        
-        // Here you would typically send the data to a server
-        // For now, we'll just show a success message
-        console.log('Form submitted:', data);
-        
-        // Show success feedback
         const button = this.form.querySelector('button[type="submit"]');
         const originalText = button.textContent;
-        button.textContent = 'Message Sent!';
-        button.style.background = 'var(--accent-secondary)';
         
-        // Reset form
-        this.form.reset();
+        // Show loading state
+        button.textContent = 'Sending...';
+        button.disabled = true;
+        
+        try {
+            // Submit to Formspree
+            const response = await fetch(this.form.action, {
+                method: 'POST',
+                body: new FormData(this.form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success
+                button.textContent = 'Message Sent!';
+                button.style.background = 'var(--accent-secondary)';
+                this.form.reset();
+            } else {
+                // Error from Formspree
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            button.textContent = 'Error - Try Again';
+            button.style.background = 'var(--accent-tertiary)';
+        }
         
         // Reset button after delay
         setTimeout(() => {
             button.textContent = originalText;
             button.style.background = '';
+            button.disabled = false;
         }, 3000);
     }
 }
