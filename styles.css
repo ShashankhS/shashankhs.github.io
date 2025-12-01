@@ -458,6 +458,21 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
     font-family: var(--font-mono);
 }
 
+.profile-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+}
+
+.profile-photo:hover {
+    border-color: var(--accent-primary);
+    transform: scale(1.02);
+}
+
 .about-text h3 {
     color: var(--accent-primary);
     margin-bottom: 1.5rem;
